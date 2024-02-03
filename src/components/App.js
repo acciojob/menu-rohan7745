@@ -97,6 +97,7 @@ const Menu = ({ dishes }) => {
             key={index}
             onClick={() => setCategory(cat)}
             className={category === cat ? 'active' : ''}
+            id={`filter-btn-${index + 1}`}
             data-test-id={`category-button-${index + 1}`}
           >
             {cat}
