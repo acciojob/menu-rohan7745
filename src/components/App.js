@@ -97,7 +97,7 @@ const Menu = ({ dishes }) => {
             key={index}
             onClick={() => setCategory(cat)}
             className={category === cat ? 'active' : ''}
-            id={`filter-btn-${index + 1}`}
+            data-test-id={`category-button-${index + 1}`}
           >
             {cat}
           </button>
@@ -105,7 +105,7 @@ const Menu = ({ dishes }) => {
       </div>
       <div className="dishes">
         {filterDishes(category).map((dish) => (
-          <div key={dish.id} className="dish">
+          <div key={dish.id} className="dish" data-test-id={`dish-${dish.id}`}>
             <img src={dish.img} alt={dish.title} />
             <div className="info">
               <h3>{dish.title}</h3>
