@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState } from 'react';
 
 const dishesData = [
@@ -23,7 +24,7 @@ const dishesData = [
     category: 'shakes',
     price: 6.99,
     img: './images/item-3.jpeg',
-    desc: `kombucha chillwave fanny pack 3 wolf moon street art photo booth before they sold out organic viral.`,
+    desc: `ombucha chillwave fanny pack 3 wolf moon street art photo booth before they sold out organic viral.`,
   },
   {
     id: 4,
@@ -96,7 +97,7 @@ const Menu = ({ dishes }) => {
             key={index}
             onClick={() => setCategory(cat)}
             className={category === cat ? 'active' : ''}
-            id={`btn-${index + 1}`}
+            id={`filter-btn-${index + 1}`}
           >
             {cat}
           </button>
