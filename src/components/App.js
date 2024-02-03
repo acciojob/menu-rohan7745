@@ -96,6 +96,7 @@ const Menu = ({ dishes }) => {
             key={index}
             onClick={() => setCategory(cat)}
             className={category === cat ? 'active' : ''}
+            id={`btn-${index + 1}`}
           >
             {cat}
           </button>
