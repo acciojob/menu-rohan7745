@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 
 const dishesData = [
@@ -76,55 +75,41 @@ const dishesData = [
   },
 ];
 
-const Menu = ({ dishes }) => {
-  const [category, setCategory] = useState('All');
-
-  const categories = ['All', ...new Set(dishes.map((dish) => dish.category))];
-
-  const filterDishes = (category) => {
-    if (category === 'All') {
-      return dishes;
-    } else {
-      return dishes.filter((dish) => dish.category === category);
-    }
-  };
-
+const DishesList = ({ dishes }) => {
   return (
-    <div className="menu">
-      <div className="categories">
-        {categories.map((cat, index) => (
-          <button
-            key={index}
-            onClick={() => setCategory(cat)}
-            className={category === cat ? 'active' : ''}
-            id={`filter-btn-${index + 1}`}
-            data-test-id={`category-button-${index + 1}`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-      <div className="dishes">
-        {filterDishes(category).map((dish) => (
-          <div key={dish.id} className="dish" data-test-id={`dish-${dish.id}`}>
-            <img src={dish.img} alt={dish.title} />
-            <div className="info">
-              <h3>{dish.title}</h3>
-              <p>{dish.desc}</p>
-              <p>${dish.price.toFixed(2)}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="dishes-list">
+      {dishes.map((dish) => (
+        <div key={dish.id} className="dish-item">
+          <img src={dish.img} alt={dish.title} />
+          <h2>{dish.title}</h2>
+          <p>{dish.desc}</p>
+          <p>${dish.price}</p>
+        </div>
+      ))}
     </div>
   );
 };
 
 const App = () => {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredDishes = selectedCategory === 'all' 
+    ? dishesData 
+    : dishesData.filter(dish => dish.category === selectedCategory);
+
   return (
-    <div>
-      <h1>Restaurant Menu</h1>
-      <Menu dishes={dishesData} />
+    <div className="app">
+      <div className="categories">
+        <button onClick={() => handleCategoryClick('all')}>All</button>
+        <button onClick={() => handleCategoryClick('breakfast')}>Breakfast</button>
+        <button onClick={() => handleCategoryClick('lunch')}>Lunch</button>
+        <button onClick={() => handleCategoryClick('shakes')}>Shakes</button>
+      </div>
+      <DishesList dishes={filteredDishes} />
     </div>
   );
 };
